@@ -1,0 +1,43 @@
+<?php
+/** @var \core\Url $url */
+/** @var \core\Page $page */
+/** @var string $error */
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <title>task3</title>
+</head>
+<body>
+<main>
+
+    <?php if ($error): ?>
+        <div style="color: red; font-weight: bold;">
+            <?= $error ?>
+        </div>
+    <?php endif ?>
+
+    <form>
+        Enter URL:<br>
+        <input type="text" name="url" value="<?php if (!empty($url)) echo htmlspecialchars($url->getUrl()) ?>">
+        <input type="submit" name="go" value="Go">
+    </form>
+
+    <?php if (!empty($page)): ?>
+        <h3>Страница: <?= $url->getUrl() ?></h3>
+        <table cellspacing="1" cellpadding="5" border="1">
+            <tr>
+                <td>HTML-тэг</td>
+                <td>Количество на странице</td>
+            </tr>
+            <?php foreach ($page->getTags()->getAll() as $tag): ?>
+            <tr>
+                <td><?= $tag->getName() ?></td>
+                <td align="center"><?= $tag->getCount() ?></td>
+            </tr>
+            <?php endforeach ?>
+        </table>
+    <?php endif ?>
+</main>
+</body>
+</html>
